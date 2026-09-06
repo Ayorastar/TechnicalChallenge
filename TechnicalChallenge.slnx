@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="TechnicalChallenge.Tests/TechnicalChallenge.Tests.csproj" Id="a51a2924-082e-46ad-a842-ee3f0fd5a048" />
+  <Project Path="TechnicalChallenge/TechnicalChallenge.csproj" />
+</Solution>
