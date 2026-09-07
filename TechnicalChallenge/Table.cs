@@ -19,6 +19,19 @@ namespace TechnicalChallenge
             Alias = alias;
         }
 
+        public Column Column(string name)
+        {
+            return new Column($"{Name}.{name}");
+        }
+
+        public Column this[string name]
+        {
+            get
+            {
+                return new Column($"{Name}.{name}");
+            }
+        }
+
         public string ToSql()
         {
             return $"[{Name}]";
@@ -28,16 +41,3 @@ namespace TechnicalChallenge
 }
 
 
-//var query = new SelectQuery(Events)
-//    .Select(Events.Id, Events.Name)
-//    .InnerJoin(
-//        EventAttendee,
-//        Where.Equal(Events.Id, EventAttendee.EventId))
-//    .InnerJoin(
-//        Attendee,
-//        Where.Equal(EventAttendee.AttendeeId, Attendee.Id))
-//    .Where(
-//        Where.Equal(Attendee.Name, "bob")
-//            .Or(Where.Equal(Events.Important, true)));
-
-//var sql = query.ToSql();
