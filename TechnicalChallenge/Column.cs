@@ -8,9 +8,15 @@ namespace TechnicalChallenge
     {
         public string Name { get; }
 
-        public string? Alias { get; }
+        public string Alias { get; }
 
-        public Column(string name, string? alias=null)
+        public Column(string name)
+        {
+            Name = name;
+            Alias = name;
+        }
+
+        public Column(string name, string alias)
         {
             Name = name;
             Alias = alias;

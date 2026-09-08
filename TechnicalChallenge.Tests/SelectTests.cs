@@ -16,7 +16,7 @@ namespace TechnicalChallenge.Tests
 
             List<Column> columns = new List<Column> { column1, column2, column3 };
 
-            table = new Table("test", columns, "alias");
+            table = new Table("test", columns);
         }
 
         [Test]

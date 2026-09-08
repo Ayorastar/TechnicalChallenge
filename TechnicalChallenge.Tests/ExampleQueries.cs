@@ -3,7 +3,7 @@ using System.Data.Common;
 
 namespace TechnicalChallenge.Tests
 {
-    public class Tests
+    public class ExampleQueries
     {
 
         private Table Events;
@@ -19,27 +19,21 @@ namespace TechnicalChallenge.Tests
             Column eventid = new Column("EventId");
 
 
-            Events = new Table("Events", new List<Column> { id, name }, "alias1");
-            EventAttendee = new Table("EventAttendee", new List<Column> { eventid, id, important }, "alias2");
-            Attendee = new Table("Attendee", new List<Column> { id, name }, "alias3");
+            Events = new Table("Events", new List<Column> { id, name });
+            EventAttendee = new Table("EventAttendee", new List<Column> { eventid, id, important });
+            Attendee = new Table("Attendee", new List<Column> { id, name });
         }
 
         [Test]
         public void Example1()  
         {
             // where statement with number passed in
-            SQLselect sqljoin = new SQLselect(Events).Select().InnerJoin(EventAttendee, Events["Id"], EventAttendee["EventId"]).InnerJoin(Attendee, EventAttendee["AttendeeId"], Attendee["Id"]).Where();
-            new SQLselect(Events).Select(Events.Id, Events.Name)
-//    .InnerJoin(
-//        EventAttendee,
-//        Where.Equal(Events.Id, EventAttendee.EventId))
-//    .InnerJoin(
-//        Attendee,
-//        Where.Equal(EventAttendee.AttendeeId, Attendee.Id))
-//    .Where(
-//        Where.Equal(Attendee.Name, "bob")
-//            .Or(Where.Equal(Events.Important, true)));
-            Assert.That(sqljoin.toSQL(), Is.EqualTo("SELECT test1.column1, test2.column2 FROM test1 INNER JOIN test2 ON test1.column2 = test2.column2"));
+            SQLobject sqljoin = new SQLselect(Events).Select().InnerJoin(EventAttendee, Events["Id"], EventAttendee["EventId"])
+                .InnerJoin(Attendee, EventAttendee["AttendeeId"], Attendee["Id"]).Where(Attendee["Name"], Operator.Equals, "bob")
+                .Or(Events["Important"], Operator.Equals, 1);
+            Assert.That(sqljoin.toSQL(), Is.EqualTo("SELECT * FROM Events INNER JOIN EventAttendee ON Events.Id = EventAttendee.EventId " +
+                "INNER JOIN Attendee ON EventAttendee.AttendeeId = Attendee.Id WHERE Attendee.Name = 'bob' " +
+                "OR Events.Important = 1"));
         }
 
     }

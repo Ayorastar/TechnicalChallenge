@@ -8,9 +8,16 @@ namespace TechnicalChallenge
     {
         public string Name { get; }
 
-        public string Alias { get; }
+        public string Alias { get; set; }
 
         public List<Column> Columns { get; }
+
+        public Table(string name, List<Column> columns)
+        {
+            Name = name;
+            Columns = columns;
+            Alias = name;
+        }
 
         public Table(string name, List<Column> columns, string alias)
         {
@@ -21,20 +28,26 @@ namespace TechnicalChallenge
 
         public Column Column(string name)
         {
-            return new Column($"{Name}.{name}");
+            return new Column($"{Alias}.{name}");
         }
 
         public Column this[string name]
         {
             get
             {
-                return new Column($"{Name}.{name}");
+                return new Column($"{Alias}.{name}");
             }
         }
 
         public string ToSql()
         {
-            return $"[{Name}]";
+            return $"[{Alias}]";
+        }
+
+        public Table SetAlias(string alias)
+        {
+            Alias = alias;
+            return this;
         }
 
     }
