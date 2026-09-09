@@ -22,14 +22,14 @@ namespace TechnicalChallenge.Tests
         [Test]
         public void TableAliases()
         {
-            // selecting all columns from the table
+            // using an alias for the table
             SQLobject sqlselect = new SQLselect(table, "alias").Select(table["column1"]).As("alias");
             Assert.That(sqlselect.toSQL(), Is.EqualTo("SELECT alias.column1 FROM test AS alias"));
         }
         [Test]
         public void ColumnAliases()
         {
-            // selecting all columns from the table
+            // using an alias for columns
             SQLobject sqlselect = new SQLselect(table, "alias2").Select(new List<Tuple<Column, string>> { new Tuple<Column, string>(table["column1"], "alias") }).As("alias2");
             Assert.That(sqlselect.toSQL(), Is.EqualTo("SELECT alias2.column1 AS alias FROM test AS alias2"));
         }

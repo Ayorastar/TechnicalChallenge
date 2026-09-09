@@ -4,14 +4,34 @@ using System.Text;
 
 namespace TechnicalChallenge
 {
+    public enum Operator
+    {
+        Equals,
+        GreaterThan,
+        LessThan,
+        GreaterThanOrEqual,
+        LessThanOrEqual,
+        NotEqual,
+        Between,
+        Like,
+        In,
+    }
+
+    public enum Join
+    {
+        INNER,
+        LEFT,
+        RIGHT,
+        FULL,
+    }
     public abstract class SQLparam
     {
         public abstract string toSQL();
     }
 
-    // implementations for different data types. could add more if needed
+    // implementations for different data types. 
 
-    // opted for this for validity checking but unfortunately have to instantiate new type every time when passing in a parameter
+    // didn't opt for this as have to instantiate new type every time when passing in a parameter. would provide validity checking though
 
     public class SQLparamString : SQLparam
     {

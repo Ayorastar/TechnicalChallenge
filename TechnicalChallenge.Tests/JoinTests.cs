@@ -26,7 +26,6 @@ namespace TechnicalChallenge.Tests
         [Test]
         public void InnerJoin()
         {
-            // where statement with number passed in
             SQLselect sqljoin = new SQLselect(table1).Select(new List<Column> { table1["column1"], table2["column2"] }).InnerJoin(table2, table1["column2"], table2["column2"]);
             Assert.That(sqljoin.toSQL(), Is.EqualTo("SELECT test1.column1, test2.column2 FROM test1 INNER JOIN test2 ON test1.column2 = test2.column2"));
         }
@@ -34,7 +33,6 @@ namespace TechnicalChallenge.Tests
         [Test]
         public void LeftJoin()
         {
-            // where statement with number passed in
             SQLselect sqljoin = new SQLselect(table1).Select(new List<Column> { table1["column1"], table2["column2"] }).LeftJoin(table2, table1["column2"], table2["column2"]);
             Assert.That(sqljoin.toSQL(), Is.EqualTo("SELECT test1.column1, test2.column2 FROM test1 LEFT JOIN test2 ON test1.column2 = test2.column2"));
         }
@@ -42,7 +40,6 @@ namespace TechnicalChallenge.Tests
         [Test]
         public void RightJoin()
         {
-            // where statement with number passed in
             SQLselect sqljoin = new SQLselect(table1).Select(new List<Column> { table1["column1"], table2["column2"] }).RightJoin(table2, table1["column2"], table2["column2"]);
             Assert.That(sqljoin.toSQL(), Is.EqualTo("SELECT test1.column1, test2.column2 FROM test1 RIGHT JOIN test2 ON test1.column2 = test2.column2"));
         }
@@ -50,7 +47,6 @@ namespace TechnicalChallenge.Tests
         [Test]
         public void FullJoin()
         {
-            // where statement with number passed in
             SQLselect sqljoin = new SQLselect(table1).Select(new List<Column> { table1["column1"], table2["column2"] }).FullJoin(table2, table1["column2"], table2["column2"]);
             Assert.That(sqljoin.toSQL(), Is.EqualTo("SELECT test1.column1, test2.column2 FROM test1 FULL JOIN test2 ON test1.column2 = test2.column2"));
         }
