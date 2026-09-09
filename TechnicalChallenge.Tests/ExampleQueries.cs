@@ -28,10 +28,10 @@ namespace TechnicalChallenge.Tests
         public void Example1()  
         {
             // query given in the example
-            SQLobject sqljoin = new SQLselect(Events).Select().InnerJoin(EventAttendee, Events["Id"], EventAttendee["EventId"])
+            SQLobject sqlexample = new SQLselect(Events).Select().InnerJoin(EventAttendee, Events["Id"], EventAttendee["EventId"])
                 .InnerJoin(Attendee, EventAttendee["AttendeeId"], Attendee["Id"]).Where(Attendee["Name"], Operator.Equals, "bob")
                 .Or(Events["Important"], Operator.Equals, 1);
-            Assert.That(sqljoin.toSQL(), Is.EqualTo("SELECT * FROM Events INNER JOIN EventAttendee ON Events.Id = EventAttendee.EventId " +
+            Assert.That(sqlexample.toSQL(), Is.EqualTo("SELECT * FROM Events INNER JOIN EventAttendee ON Events.Id = EventAttendee.EventId " +
                 "INNER JOIN Attendee ON EventAttendee.AttendeeId = Attendee.Id WHERE Attendee.Name = 'bob' " +
                 "OR Events.Important = 1"));
         }
@@ -40,9 +40,9 @@ namespace TechnicalChallenge.Tests
         public void Example2()
         {
             // query using 'And' and 'Full Join'
-            SQLobject sqljoin = new SQLselect(Events, "e").Select(Events["Name"]).As("e").FullJoin(EventAttendee, Events["Id"], EventAttendee["EventId"])
+            SQLobject sqlexample = new SQLselect(Events, "e").Select(Events["Name"]).As("e").FullJoin(EventAttendee, Events["Id"], EventAttendee["EventId"])
                 .Where(EventAttendee["Important"], Operator.Equals, 1).And(Events["Name"], Operator.Equals, "test");
-            Assert.That(sqljoin.toSQL(), Is.EqualTo("SELECT e.Name FROM Events AS e FULL JOIN EventAttendee ON e.Id = EventAttendee.EventId " +
+            Assert.That(sqlexample.toSQL(), Is.EqualTo("SELECT e.Name FROM Events AS e FULL JOIN EventAttendee ON e.Id = EventAttendee.EventId " +
                 "WHERE EventAttendee.Important = 1 AND e.Name = 'test'"));
         }
 

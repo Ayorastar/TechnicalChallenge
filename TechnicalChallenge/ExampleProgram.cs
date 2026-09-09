@@ -18,9 +18,12 @@ namespace TechnicalChallenge
             Table EventAttendee = new Table("EventAttendee", new List<Column> { eventid, id, important });
             Table  Attendee = new Table("Attendee", new List<Column> { id, name });
 
-            SQLobject sqljoin = new SQLselect(Events, "e").Select(Events["Name"]).As("e").FullJoin(EventAttendee, Events["Id"], EventAttendee["EventId"])
+            SQLobject sqlexample = new SQLselect(Events, "e").Select(Events["Name"]).As("e").FullJoin(EventAttendee, Events["Id"], EventAttendee["EventId"])
                 .Where(EventAttendee["Important"], Operator.Equals, 1).And(Events["Name"], Operator.Equals, "test");
-            Console.WriteLine(sqljoin.toSQL());
+            Console.WriteLine(sqlexample.toSQL());
+
+            // To prevent the screen from running and closing quickly 
+            Console.ReadKey();
         }
     }
 }
