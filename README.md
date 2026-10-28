@@ -1,4 +1,4 @@
-# C#/SQL Techincal Challenge 
+# C#/SQL Technical Challenge 
 
 This C# application demonstrates a library that can build SQL queries programmatically with C#.
 
